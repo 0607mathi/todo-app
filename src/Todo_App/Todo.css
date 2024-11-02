@@ -55,7 +55,7 @@ input:focus{
     box-shadow: 0px 0px 1px 1px #AEACF6;
 }
 
-.input-btn>button{
+button{
     width: 50px;
     height: 40px;
     border: none;
@@ -63,30 +63,39 @@ input:focus{
     font-family: "Itim", cursive;
     font-weight: 400;
     font-style: normal;
-    background-color: #CECDF9;
+    background-color: #5d58eccc;
     color: white;
     font-weight: 600;
     cursor: pointer;
 }
 
-.input-btn>button:hover{
-    background-color:#AEACF6;
+button:hover{
+    background-color: #5C58EC;
     box-shadow: 0px 0px 1px 1px #AEACF6;
 }
 
 .list-data{
     padding: 7px 7px;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     gap: 15px;
 }
 
-.list-data>.strick{
+.strick{
     text-decoration: line-through;
 }
 
 .list-data>img{
     width: 15px;
     cursor: pointer;
+}
+
+.addbtn{
+    width: 100px;
+    background-color: #5d58eccc;
+}
+
+.addbtn:hover{
+    background-color: #5C58EC;
 }

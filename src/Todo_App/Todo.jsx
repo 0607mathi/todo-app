@@ -1,14 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Todo.css'
 import todo from "../assets/To do list-bro.png"
 import Done from '../assets/check.png'
 import Cross from '../assets/cross.png'
 const Todo = () => {
-    const [strick,setStrick]=useState()
-    const [data,setData]=useState([])
-    var ans="";
-    console.log(data[0]);
-    console.log(data.length);
+    const [strick,setStrick]=useState(false)
+    const [data,setData]=useState("")
+    const [arr,setArr]=useState([])
+    // console.log(arr)
+    // console.log(arr.length)
+    const GetData = ()=>{
+        // console.log(data)
+        if(data!=""){
+            setArr([...arr, {id:arr.length,task:data,completed:false}])
+            setData("")
+        }
+        else alert("enter a task!")
+    }
+    const toggleComplete = (id) => {
+        setArr(prevArr => prevArr.map(item => item.id === id ? { ...item, completed: !item.completed } : item
+            )
+        );
+    };
+
+    const RemoveTask = (id)=>{
+        arr.map(item=>{
+            if(item.id===id) arr.filter()
+
+        })
+    }
+    
   return (
     <div className='todo-container'>
 
@@ -17,21 +38,30 @@ const Todo = () => {
         <img src={todo} className='todo-img' alt="Todo img" />
 
         <div className='input-btn'>
-            <input type="text" name="user-data" id="user-data" placeholder='Enter your task...!' onChange={(e)=>{ans=(e.target.value)}}/>
-            <button onClick={()=>setData([...data,ans])}>Add</button>
+            <input type="text" name="user-data" id="user-data" placeholder='Enter your task...!' onChange={(e)=>{setData(e.target.value)}} value={data}/>
+            <button className='' onClick={()=>GetData()}>Add</button>
         </div>
 
         <div className="list">
             <ul className=''>
-                <li className=''>
-                    <div className='list-data'>
-                        <span className={strick}>Todo app</span>
-                        <img src={Done} onClick={()=>setStrick("strick")} alt="done" />
-                        <img src={Cross} alt="clear" />
-                    </div>
-                </li>
+               {
+                arr.map((items,index)=>{
+                    return(
+                        <li className='' key={index}>
+                        <div className='list-data'>
+                            <span className={(items.completed)?"strick":""}>{items.task}</span>
+                            <img className='' src={Done} onClick={() => toggleComplete(items.id)} alt="done" />
+                            <img className='' src={Cross} onClick={()=>RemoveTask(items.id)} alt="clear" />
+                        </div>
+                    </li>
+                    )
+                   }
+                )
+               }
             </ul>
         </div>
+
+        <button className='addbtn' onClick={()=>{setArr([])} }>Clear</button>
     </div>
   )
 }
